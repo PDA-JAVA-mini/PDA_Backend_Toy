@@ -8,6 +8,7 @@ public class TripHandler {
     }
 
     public Trip save(Trip trip) {
-
+        //임시
+        return trip;
     }
 }
