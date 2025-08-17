@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 public abstract class JsonHandler {
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    protected JsonHandler() {
+    protected JsonHandler() { // 제어접근자 추가
         mapper.setPropertyNamingStrategy(new PropertyNamingStrategies.SnakeCaseStrategy());
     }
 
