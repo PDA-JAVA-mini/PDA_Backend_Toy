@@ -1,5 +1,6 @@
 package user;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -9,13 +10,20 @@ public class User {
   private String nickname;
   private List<Integer> tripsIds;
 
-  public User(){}
+  public User(){
+    this.id = 0;
+    this.loginId = null;
+    this.password = null;
+    this.nickname = null;
+    this.tripsIds = new ArrayList<>();
+  }
 
   public User(int id, String loginId, String password, String nickname) {
     this.id = id;
     this.loginId = loginId;
     this.password = password;
     this.nickname = nickname;
+    this.tripsIds = new ArrayList<>();
   }
 
   public User(int id, String loginId, String password, String nickname, List<Integer> tripsIds) {
