@@ -12,8 +12,6 @@ public abstract class JsonHandler {
         mapper.setPropertyNamingStrategy(new PropertyNamingStrategies.SnakeCaseStrategy());
     }
 
-    public abstract <T> void write(T object, String filePath);
-    public abstract <T> T read(Class<T> clazz, String filePath);
 
     public <T> String serialize(T object) throws RuntimeException{
         try{
