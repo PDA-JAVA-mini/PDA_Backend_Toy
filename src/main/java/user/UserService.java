@@ -10,7 +10,7 @@ import java.util.List;
 public class UserService {
 
   private final UserHandler userHandler;
-  private static final String BASE_DIR = "src/main/java/data/user";
+  private static final String BASE_DIR = "src/main/java/data/users";
   private static User loginUser;
 
   public UserService(UserHandler userHandler) {
@@ -35,18 +35,18 @@ public class UserService {
       return 1;
     }
 
-    try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "user_*.json")) {
+    try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
       int maxId = 0;
       for (Path p : stream) {
-        String fileName = p.getFileName().toString();
-        String idStr = fileName.substring(fileName.indexOf('_') + 1, fileName.lastIndexOf('.'));
-        try {
-          int id = Integer.parseInt(idStr);
-          if (id > maxId) {
-            maxId = id;
+        if (Files.isDirectory(p)) {
+          try {
+            int id = Integer.parseInt(p.getFileName().toString());
+            if (id > maxId) {
+              maxId = id;
+            }
+          } catch (NumberFormatException e) {
+            // Ignore directories with non-numeric names
           }
-        } catch (NumberFormatException e) {
-          // Ignore files with non-numeric IDs
         }
       }
       return maxId + 1;
@@ -65,11 +65,16 @@ public class UserService {
       return null;
     }
 
-    try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "user_*.json")) {
+    try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
       for (Path p : stream) {
-        User u = userHandler.read(p.toString(), User.class);
-        if (u != null && loginId.equals(u.getLoginId())) {
-          return u;
+        if (Files.isDirectory(p)) {
+          Path userFile = p.resolve("user_info.json");
+          if (Files.exists(userFile)) {
+            User u = userHandler.read(userFile.toString(), User.class);
+            if (u != null && loginId.equals(u.getLoginId())) {
+              return u;
+            }
+          }
         }
       }
     } catch (IOException e) {
@@ -96,6 +101,6 @@ public class UserService {
   }
 
   private String buildUserFilePath(String userId) {
-    return BASE_DIR + "/user_" + userId + ".json";
+    return BASE_DIR + "/" + userId + "/user_info.json";
   }
 }
