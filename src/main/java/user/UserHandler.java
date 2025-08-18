@@ -43,12 +43,12 @@ public class UserHandler extends JsonHandler {
   }
 
   public User findUserById(int userId) {
-    String path = usersBasePath + "/users_" + userId + ".json";
+    String path = usersBasePath + "/" + userId + "/user_info.json";
     return read(path, User.class);
   }
 
   public void saveUser(User user) {
-    String path = usersBasePath + "/users_" + user.getId() + ".json";
+    String path = usersBasePath + "/" + user.getId() + "/user_info.json";
     write(path, user);
   }
 

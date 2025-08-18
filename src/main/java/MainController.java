@@ -12,7 +12,7 @@ public class MainController {
 
   public void run() {
     Scanner scanner = new Scanner(System.in);
-    String userBasePath = "data/users";
+    String userBasePath = "src/main/java/data/users";
 
     UserHandler userHandler = new UserHandler(userBasePath);
 
