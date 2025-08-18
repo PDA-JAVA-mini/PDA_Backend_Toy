@@ -1,17 +1,19 @@
 package trip;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class TripService {
 
-    public final TripHandler tripHandler;
+    private final UserHandler userHandler;
 
-    public TripService(TripHandler tripHandler) {
-        this.tripHandler = tripHandler;
+    public TripService(UserHandler userHandler) {
+        this.userHandler = userHandler;
     }
 
-    public Trip createTrip(String tripName, Date start_date, Date end_date) {
-        Trip newTrip = new Trip(tripName, start_date, end_date);
-        return tripHandler.save(newTrip);
+    public Trip createTrip(int loggedInUserId, String tripName, Date startDate, Date endDate) {
+        Trip newTrip = new Trip(tripName, startDate, endDate);
+        return userHandler.createTripForUser(loggedInUserId, newTrip);
     }
 }

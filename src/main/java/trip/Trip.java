@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Trip {
     private final int tripId;
+    private int userId;
     private String tripName;
     private Date startDate;
     private Date endDate;
@@ -22,7 +23,9 @@ public class Trip {
     }
 
     public Trip(int id, String tripName, Date startDate, Date endDate, List<Itinerary> itineraries) {
+
         this.tripId = id;
+        this.userId = userId;
         this.tripName = tripName;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -35,6 +38,10 @@ public class Trip {
 
     public Trip withId(int id){
         return new Trip(id, this.tripName, this.startDate, this.endDate, this.itineraries);
+    }
+
+    public Trip withIdAndUserId(int tripId, int userId) {
+        return new Trip(tripId, userId, this.tripName, this.startDate, this.endDate, this.itineraries);
     }
 
     public int getTripId() {
