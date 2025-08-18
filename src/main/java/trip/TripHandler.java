@@ -32,7 +32,7 @@ public class TripHandler extends JsonHandler {
     }
 
     public Trip findById(int userId, int tripId){
-        String filePath = Paths.get(userBasePath, String.valueOf(userId), "trips", tripId + ".json").toString();
+        String filePath = Paths.get(userBasePath, String.valueOf(userId), "trips","Trip_" + tripId + ".json").toString();
         File file = new File(filePath);
         if (!file.exists()) {
             return null;
