@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 public abstract class JsonHandler {
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    JsonHandler() {
+    public JsonHandler() {
         mapper.setPropertyNamingStrategy(new PropertyNamingStrategies.SnakeCaseStrategy());
     }
 

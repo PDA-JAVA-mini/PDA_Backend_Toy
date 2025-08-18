@@ -1,21 +1,13 @@
-import itinerary.ItineraryView;
-import itinerary.model.Itinerary;
+import user.UserHandler;
+import user.UserService;
+import view.LoginView;
 
 public class MainController {
     public void run(){
-        int caseNum = 2;
-        switch (caseNum) {
-            case 2:
-                boolean isFinished = true;
-                while(isFinished){
-                    ItineraryView itineraryView = new ItineraryView();
-                    Itinerary i = new Itinerary(itineraryView.getTransportation(), itineraryView.getAccommodation());
-                    itineraryView.showItinerary(i);
+        UserHandler userHandler = new UserHandler();
+        UserService userService = new UserService(userHandler);
+        LoginView loginView = new LoginView(userService);
 
-                }
-                break;
-
-
-        }
+        loginView.show();
     }
 }
