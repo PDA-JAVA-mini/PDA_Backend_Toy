@@ -7,12 +7,15 @@ import java.util.Date;
 import java.util.List;
 
 public class Trip {
-    private final int tripId;
+    private int tripId;
     private int userId;
     private String tripName;
     private Date startDate;
     private Date endDate;
     private List<Itinerary> itineraries;
+
+    public Trip() {
+    }
 
     public Trip(String tripName, Date startDate, Date endDate){
         this.tripId = 0;
