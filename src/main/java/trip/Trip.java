@@ -1,7 +1,10 @@
 package trip;
 
+import itinerary.model.Itinerary;
+
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Trip {
     private final int tripId;
@@ -19,7 +22,8 @@ public class Trip {
         this.itineraries = new ArrayList<>();
     }
 
-    public Trip(int id, int userId, String tripName, Date startDate, Date endDate, List<Itinerary> itineraries) {
+    public Trip(int id, String tripName, Date startDate, Date endDate, List<Itinerary> itineraries) {
+
         this.tripId = id;
         this.userId = userId;
         this.tripName = tripName;

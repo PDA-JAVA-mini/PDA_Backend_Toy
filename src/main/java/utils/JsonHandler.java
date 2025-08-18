@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 public abstract class JsonHandler {
     private static final ObjectMapper mapper = new ObjectMapper();
 
+
     protected JsonHandler() { // 제어접근자 추가
         mapper.setPropertyNamingStrategy(new PropertyNamingStrategies.SnakeCaseStrategy());
     }
@@ -27,11 +28,11 @@ public abstract class JsonHandler {
         }
     }
 
-    public <T> T deserialize(String json, TypeReference<T> typeRef) throws RuntimeException {
-        try {
-            return mapper.readValue(json, typeRef);
-        }catch(Exception e){
-            throw new RuntimeException("Failed to deserialize generic type", e);
-        }
-    }
+//    public <T> T deserialize(String json, TypeReference<T> typeRef) throws RuntimeException {
+//        try {
+//            return mapper.readValue(json, typeRef);
+//        }catch(Exception e){
+//            throw new RuntimeException("Failed to deserialize generic type", e);
+//        }
+//    }
 }
