@@ -2,7 +2,9 @@ package user;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import trip.Trip;
 import trip.TripHandler;
@@ -41,15 +43,22 @@ public class UserHandler extends JsonHandler {
   }
 
   public User findUserById(int userId) {
-    String path = usersBasePath + "/user_" + userId + ".json";
+    String path = usersBasePath + "/users_" + userId + ".json";
     return read(path, User.class);
   }
 
   public void saveUser(User user) {
-    String path = usersBasePath + "/user_" + user.getId() + ".json";
+    String path = usersBasePath + "/users_" + user.getId() + ".json";
     write(path, user);
   }
 
+  public List<Trip> findAllTripsForUser(int userId) {
+    User user = findUserById(userId);
+    if (user == null || user.getTripIds().isEmpty()) {
+      return new ArrayList<>();
+    }
+    return tripHandler.findAllByUserId(userId, user.getTripIds());
+  }
 
   /**
    * 모든 사용자 폴더를 스캔하여 다음 tripId를 생성합니다.

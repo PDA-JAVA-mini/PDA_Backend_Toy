@@ -78,7 +78,7 @@ public class UserService {
     return null;
   }
 
-  public void login(String loginId, String password) {
+  public User login(String loginId, String password) {
     User user = getUserByLoginId(loginId);
     if (user == null) {
       throw new IllegalStateException("존재하지 않는 login_id입니다: " + loginId);
@@ -88,7 +88,7 @@ public class UserService {
       throw new IllegalStateException("비밀번호가 일치하지 않습니다.");
     }
 
-    loginUser = user;
+    return user;
   }
 
   public User getLoginUser() {
