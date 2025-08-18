@@ -1,5 +1,6 @@
 package view;
 
+import user.User;
 import user.UserService;
 
 import java.util.Scanner;
@@ -8,12 +9,12 @@ public class LoginView {
     private final UserService userService;
     private final Scanner scanner;
 
-    public LoginView(UserService userService) {
+    public LoginView(UserService userService, Scanner scanner) {
         this.userService = userService;
-        this.scanner = new Scanner(System.in);
+        this.scanner = scanner;
     }
 
-    public boolean show() {
+    public User show() {
         while (true) {
             System.out.println("--- PDA --- ");
             System.out.println("(1)로그인 (2)회원가입 (3)종료");
@@ -22,32 +23,36 @@ public class LoginView {
 
             switch (choice) {
                 case "1":
-                    return login();
+                    User loggedInUser = login();
+                    if (loggedInUser != null) {
+                        return loggedInUser;
+                    }
+                    break;
                 case "2":
                     signup();
                     break;
                 case "3":
                     System.out.println("프로그램을 종료합니다.");
-                    return false;
+                    return null;
                 default:
                     System.out.println("잘못된 입력입니다.");
             }
         }
     }
 
-    private boolean login() {
+    private User login() {
         System.out.print("Login ID: ");
         String loginId = scanner.nextLine();
         System.out.print("Password: ");
         String password = scanner.nextLine();
 
         try {
-            userService.login(loginId, password);
+            User user = userService.login(loginId, password);
             System.out.println("로그인 성공!");
-            return true;
+            return user;
         } catch (IllegalStateException e) {
             System.out.println(e.getMessage());
-            return false;
+            return null;
         }
     }
 
