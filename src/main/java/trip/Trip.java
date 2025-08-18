@@ -22,10 +22,19 @@ public class Trip {
         this.itineraries = new ArrayList<>();
     }
 
-    public Trip(int id, String tripName, Date startDate, Date endDate, List<Itinerary> itineraries) {
+  public Trip(int tripId, int userId, String tripName, Date startDate,
+      Date endDate, List<Itinerary> itineraries) {
+    this.tripId = tripId;
+    this.userId = userId;
+    this.tripName = tripName;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.itineraries = itineraries;
+  }
+
+  public Trip(int id, String tripName, Date startDate, Date endDate, List<Itinerary> itineraries) {
 
         this.tripId = id;
-        this.userId = userId;
         this.tripName = tripName;
         this.startDate = startDate;
         this.endDate = endDate;

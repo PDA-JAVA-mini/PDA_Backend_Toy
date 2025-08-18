@@ -13,7 +13,7 @@ public class LoginView {
         this.scanner = new Scanner(System.in);
     }
 
-    public void show() {
+    public boolean show() {
         while (true) {
             System.out.println("--- PDA --- ");
             System.out.println("(1)로그인 (2)회원가입 (3)종료");
@@ -22,16 +22,13 @@ public class LoginView {
 
             switch (choice) {
                 case "1":
-                    if (!login()) {
-                        return;
-                    }
-                    break;
+                    return login();
                 case "2":
                     signup();
                     break;
                 case "3":
                     System.out.println("프로그램을 종료합니다.");
-                    return;
+                    return false;
                 default:
                     System.out.println("잘못된 입력입니다.");
             }
@@ -47,11 +44,10 @@ public class LoginView {
         try {
             userService.login(loginId, password);
             System.out.println("로그인 성공!");
-            MainView mainView = new MainView();
-            return mainView.show();
+            return true;
         } catch (IllegalStateException e) {
             System.out.println(e.getMessage());
-            return true;
+            return false;
         }
     }
 

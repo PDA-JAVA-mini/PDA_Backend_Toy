@@ -1,5 +1,7 @@
 package user;
 
+import static java.lang.Integer.valueOf;
+
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.ArrayList;
@@ -21,10 +23,10 @@ public class UserService {
     }
 
     int newUserId = getNextUserId();
-    User newUser = new User(String.valueOf(newUserId), loginId, password, nickname);
+    User newUser = new User(newUserId, loginId, password, nickname);
 
     String filePath = buildUserFilePath(String.valueOf(newUserId));
-    userHandler.write(newUser, filePath);
+    userHandler.write(filePath, newUser);
   }
 
   private int getNextUserId() {
@@ -65,7 +67,7 @@ public class UserService {
 
     try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "user_*.json")) {
       for (Path p : stream) {
-        User u = userHandler.read(User.class, p.toString());
+        User u = userHandler.read(p.toString(), User.class);
         if (u != null && loginId.equals(u.getLoginId())) {
           return u;
         }
