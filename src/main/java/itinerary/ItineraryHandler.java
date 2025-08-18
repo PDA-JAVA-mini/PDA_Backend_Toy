@@ -15,7 +15,6 @@ public class ItineraryHandler extends JsonHandler{
         currentItineraryId = itineraryCnt;
     }
 
-    @Override
     public <T> void write(T object, String filePath) {
         String json = serialize(object);
         File file = new File(filePath);
@@ -26,7 +25,6 @@ public class ItineraryHandler extends JsonHandler{
         }
     }
 
-    @Override
     public <T> T read(Class<T> clazz, String filePath) {
         try {
             String json = new String(java.nio.file.Files.readAllBytes(new File(filePath).toPath()));
